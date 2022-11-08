@@ -3,6 +3,8 @@ const Mark = require("../entity/Marks");
 const XLSX = require("xlsx");
 const path = require("path");
 
+//Create student
+
 const createStudent = async (req, res) => {
   try {
     const resp = await Student.create(req.body, {
@@ -22,6 +24,8 @@ const createStudent = async (req, res) => {
   }
 };
 
+//Getting data from database and write into excel file
+
 const createExcel = async (req, res) => {
   try {
     //file name
@@ -30,12 +34,12 @@ const createExcel = async (req, res) => {
     // Create a new blank XLSX Document
     let workbook = XLSX.utils.book_new();
 
-	// //Column
-	// const columnsName=[
-	// 	{Student_name,
-	// 	S_Mark1,
-	// 	S_Mark2}
-	// ]
+    // //Column
+    // const columnsName=[
+    // 	{Student_name,
+    // 	S_Mark1,
+    // 	S_Mark2}
+    // ]
 
     // The data that will be added to the sheet
     var dataForSheet = [{}];
@@ -48,17 +52,16 @@ const createExcel = async (req, res) => {
 
     console.log(dataForSheet);
 
-    
     const data = dataForSheet.map((user) => {
       return [user.s_name, user.Mark.mark1, user.Mark.mark2];
     });
 
     console.log(data);
 
-	// const dataForExcel=[
-	// 	{columnsName,
-	// 	data}
-	// ]
+    // const dataForExcel=[
+    // 	{columnsName,
+    // 	data}
+    // ]
 
     // Convert the Array data to a sheet
     let sheetData = XLSX.utils.json_to_sheet(data);
@@ -86,25 +89,3 @@ module.exports = {
   createStudent,
   createExcel,
 };
-
-//const XLSX = require("xlsx");
-
-// // Create a new blank XLSX Document
-// let workbook = XLSX.utils.book_new();
-
-// // The data that will be added to the sheet
-// let dataForSheet = [
-//   ["Column 1", "Column 2", "Column 3", "Column 4", "Column 5", "Column 6"],
-//   ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6"],
-//   ["Data 7", "Data 8", "Data 9", "Data 10"],
-//   ["Data 11", "Data 12", "", "", "Data 13", "Data 14", "Data 15"],
-// ];
-
-// // Convert the Array data to a sheet
-// let sheetData = XLSX.utils.aoa_to_sheet(dataForSheet);
-
-// // Add the sheet to the workbook
-// XLSX.utils.book_append_sheet(workbook, sheetData, "Sheet 1");
-
-// // Save the XLSX File.
-// XLSX.writeFile(workbook, "FILE_NAME.xlsx");
