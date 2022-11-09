@@ -24,7 +24,7 @@ const createStudent = async (req, res) => {
   }
 };
 
-//Getting data from database and write into excel file
+//Getting data from database and write into excel file using xlsx
 
 const createExcel = async (req, res) => {
   try {
@@ -33,13 +33,6 @@ const createExcel = async (req, res) => {
     const filePath = "./FILE_NAME.xlsx";
     // Create a new blank XLSX Document
     let workbook = XLSX.utils.book_new();
-
-    // //Column
-    // const columnsName=[
-    // 	{Student_name,
-    // 	S_Mark1,
-    // 	S_Mark2}
-    // ]
 
     // The data that will be added to the sheet
     var dataForSheet = [{}];
@@ -58,13 +51,6 @@ const createExcel = async (req, res) => {
 
     console.log(data);
 
-    // const dataForExcel=[
-    // 	{columnsName,
-    // 	data}
-    // ]
-
-    // Convert the Array data to a sheet
-    let sheetData = XLSX.utils.json_to_sheet(data);
     console.log("sheet data");
     console.log(sheetData);
 
